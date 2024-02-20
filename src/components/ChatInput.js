@@ -1,12 +1,25 @@
 import TextInput from "./atoms/TextInput";
 import SendButton from "./atoms/SendButton";
+import {useState} from "react";
 
-function ChatInput() {
+function ChatInput({setChatMessage}) {
+    const [inputValue, setInputValue] = useState('');
+
+    function handleChange(e) {
+        e.preventDefault();
+        setInputValue(e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setChatMessage(inputValue);
+    }
+
     return (
-        <div data-testid='chat-input'>
-            <TextInput />
+        <form onSubmit={handleSubmit} data-testid='chat-input'>
+            <TextInput handleChange={handleChange} />
             <SendButton />
-        </div>
+        </form>
     )
 }
 
