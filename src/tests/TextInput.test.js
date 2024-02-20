@@ -1,5 +1,5 @@
 import React from "react";
-import {createEvent, fireEvent, render, screen} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 import TextInput from '../components/atoms/TextInput';
 
 it("renders the TextInput Component", () => {
@@ -10,13 +10,13 @@ it("renders the TextInput Component", () => {
 });
 
 it("calls the handleChange prop when onChange event is triggered", () => {
-    render(<TextInput />);
     const handleChange = jest.fn();
-    const onChangeSpy = jest.fn();
+    render(<TextInput handleChange={handleChange} />);
+
     const textBox = screen.getByTestId('text-input');
     fireEvent.change(textBox, {
         target: { value: 'Foo' }
     });
-    expect(onChangeSpy).toHaveBeenCalled()
+    expect(textBox.value).toBe('Foo')
     expect(handleChange).toHaveBeenCalled()
 });
