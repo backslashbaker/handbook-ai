@@ -11,10 +11,12 @@ it("renders the TextInput Component", () => {
 
 it("calls the handleChange prop when onChange event is triggered", () => {
     render(<TextInput />);
+    const handleChange = jest.fn();
     const onChangeSpy = jest.fn();
     const textBox = screen.getByTestId('text-input');
     fireEvent.change(textBox, {
         target: { value: 'Foo' }
     });
     expect(onChangeSpy).toHaveBeenCalled()
+    expect(handleChange).toHaveBeenCalled()
 });
