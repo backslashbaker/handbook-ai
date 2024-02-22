@@ -1,7 +1,7 @@
-function ChatMessage() {
+function ChatMessage({message}) {
     return (
         <div data-testid='chat-message'>
-            <p></p>
+            <p>{message}</p>
         </div>
     )
 }
