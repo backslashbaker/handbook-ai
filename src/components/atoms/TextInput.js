@@ -1,6 +1,6 @@
 function TextInput({handleChange}) {
     return (
-        <input onChange={handleChange} data-testid='text-input' type='text' />
+        <input id='text-input' onChange={handleChange} data-testid='text-input' type='text' />
     )
 }
 
