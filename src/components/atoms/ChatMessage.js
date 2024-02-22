@@ -1,6 +1,6 @@
-function ChatMessage({message}) {
+function ChatMessage({message, messageFromAi}) {
     return (
-        <div data-testid='chat-message'>
+        <div className={messageFromAi ? 'message-from-ai' : 'message-from-user'} data-testid='chat-message'>
             <p>{message}</p>
         </div>
     )
