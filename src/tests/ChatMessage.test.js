@@ -19,3 +19,9 @@ it('has the css class message-from-ai when the messageFromAi prop equals true', 
     const chatMessage = screen.getByTestId('chat-message');
     expect(chatMessage.outerHTML).toContain('class="message-from-ai"');
 });
+
+it('has the css class message-from-user when no messageFromAi prop given', () => {
+    render(<ChatMessage message={'Test message'} />);
+    const chatMessage = screen.getByTestId('chat-message');
+    expect(chatMessage.outerHTML).toContain('class="message-from-user"');
+});
