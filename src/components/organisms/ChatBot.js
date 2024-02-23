@@ -1,8 +1,6 @@
 import ChatInput from "../molecules/ChatInput";
 import ChatOutput from "../molecules/ChatOutput";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import softwareEngineerRole from "../../data/preprompts";
 
 function ChatBot() {
     const [chatMessage, setChatMessage] = useState(null);
@@ -15,7 +13,7 @@ function ChatBot() {
     }, [chatMessage])
 
     return (
-    <div className="ChatBot">
+    <div className="ChatBot" data-testid='chat-bot'>
         <ChatOutput messages={messages} />
         <ChatInput setChatMessage={setChatMessage} />
     </div>
