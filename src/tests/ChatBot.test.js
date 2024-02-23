@@ -1,10 +1,10 @@
 import React from "react";
-import {fireEvent, render, screen} from "@testing-library/react";
-import { http, HttpResponse } from 'msw';
+import {fireEvent, render, screen, waitFor} from "@testing-library/react";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 import ChatBot from "../components/organisms/ChatBot";
 
-
-const expectedResponse = {
+const mockData = {
     "id": "chatcmpl-sz183nigut90i1w3kz58we",
     "object": "chat.completion",
     "created": 1708707337,
@@ -26,45 +26,32 @@ const expectedResponse = {
     }
 }
 
-http.post(
-    'http://localhost:1234/v1/chat/completions',
-    ({ request, params, cookies }) => {
-        return HttpResponse.json(expectedResponse)
-    },
-)
-
-it('displays the ChatBot component', () => {
-    render(<ChatBot />);
-    const chatBot = screen.getByTestId('chat-bot');
-    expect(chatBot).toBeInTheDocument();
-});
-
-it('displays users message when text is entered into the input form and send button is clicked', () => {
-    render(<ChatBot />);
-    const chatBot = screen.getByTestId('chat-bot');
-    const textInput = screen.getByTestId('text-input');
-    const sendButton = screen.getByTestId('send-button');
-
-    fireEvent.change(textInput, {
-        target: { value: 'Foo' }
+describe('render tests', () => {
+    it('displays the ChatBot component', () => {
+        render(<ChatBot />);
+        const chatBot = screen.getByTestId('chat-bot');
+        expect(chatBot).toBeInTheDocument();
     });
 
-    fireEvent.click(sendButton);
+    it('displays users message and ai response when text is entered into the input form and send button is clicked', async () => {
+        let mock = new MockAdapter(axios);
+        mock.onPost("http://localhost:1234/v1/chat/completions")
+            .reply(200, mockData);
+        render(<ChatBot />);
+        const chatBot = screen.getByTestId('chat-bot');
+        const textInput = screen.getByTestId('text-input');
+        const sendButton = screen.getByTestId('send-button');
 
-    expect(chatBot.innerHTML).toContain('Foo')
-});
+        fireEvent.change(textInput, {
+            target: { value: 'Foo' }
+        });
 
-it('displays response from ai when user submits a message', () => {
-    render(<ChatBot />);
-    const chatBot = screen.getByTestId('chat-bot');
-    const textInput = screen.getByTestId('text-input');
-    const sendButton = screen.getByTestId('send-button');
+        fireEvent.click(sendButton);
 
-    fireEvent.change(textInput, {
-        target: { value: 'Hi' }
+        expect(chatBot.innerHTML).toContain('Foo');
+
+        await waitFor(() => {
+            expect(chatBot.innerHTML).toContain('Test ai response');
+        })
     });
-
-    fireEvent.click(sendButton);
-
-    expect(chatBot.innerHTML).toContain('Test ai response')
 });
