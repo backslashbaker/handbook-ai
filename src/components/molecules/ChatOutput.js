@@ -1,4 +1,4 @@
-import ChatMessage from "./atoms/ChatMessage";
+import ChatMessage from "../atoms/ChatMessage";
 
 function ChatOutput({messages}) {
     if (messages) {

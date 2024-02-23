@@ -1,5 +1,5 @@
-import TextInput from "./atoms/TextInput";
-import SendButton from "./atoms/SendButton";
+import TextInput from "../atoms/TextInput";
+import SendButton from "../atoms/SendButton";
 import {useState} from "react";
 
 function ChatInput({setChatMessage}) {
