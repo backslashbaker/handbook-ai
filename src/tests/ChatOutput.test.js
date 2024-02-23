@@ -1,6 +1,6 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import ChatOutput from '../components/ChatOutput';
+import ChatOutput from '../components/molecules/ChatOutput';
 
 it('displays the ChatOutput component', () => {
     render(<ChatOutput />);
