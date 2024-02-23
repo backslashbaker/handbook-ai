@@ -5,7 +5,7 @@ function ChatOutput({messages}) {
         return (
             <div className='chat-container' data-testid='chat-output'>
                 {messages.map((message, index) => {
-                    return <ChatMessage key={index} message={message.messageText} messageFromAi={message.fromAi}/>
+                    return <ChatMessage key={index} message={message.messageText} messageFromAi={message.fromAi} />
                 })}
             </div>
         )

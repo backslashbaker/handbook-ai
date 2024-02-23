@@ -17,7 +17,10 @@ it('displays messages from user and ai when given an array of objects with the k
     render(<ChatOutput messages={testMessages} />);
     const chatOutput = screen.getByTestId('chat-output');
     const messages = screen.getAllByTestId('chat-message');
+
     expect(messages.length).toBe(2);
     expect(chatOutput.innerHTML).toContain('Test message from user');
     expect(chatOutput.innerHTML).toContain('Test message from ai');
+    expect(messages[0].outerHTML).toContain('class="message-from-user"');
+    expect(messages[1].outerHTML).toContain('class="message-from-ai"');
 });
