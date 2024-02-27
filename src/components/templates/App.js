@@ -1,14 +1,13 @@
 import '../../assets/App.css';
-import Header from '../atoms/Header';
 import ChatBot from "../organisms/ChatBot";
 
 function App() {
 
     return (
-    <div className="App">
-        <Header />
+    <main className="App">
         <ChatBot />
-    </div>
+        <p className='info'>Ask a local Large Language Model AI questions about the Made Tech Handbook. Please be aware answers may not be accurate!</p>
+    </main>
     );
 }
 

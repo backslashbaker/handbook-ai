@@ -1,6 +1,8 @@
 function Header() {
   return (
-      <h1>Chat Bot</h1>
+      <header>
+        <h1>Chat Bot</h1>
+      </header>
   )
 }
 

@@ -10,14 +10,23 @@ function ChatInput({setChatMessage}) {
         setInputValue(e.target.value);
     }
 
+    function handleKeyPress(e) {
+        if (e.keyCode === 13 && e.shiftKey === false) {
+            handleSubmit(e);
+        }
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         setChatMessage(inputValue);
+        const textArea = document.querySelector('.chat-input textarea');
+        textArea.value = '';
+        textArea.focus();
     }
 
     return (
-        <form onSubmit={handleSubmit} data-testid='chat-input'>
-            <TextInput handleChange={handleChange} />
+        <form className='chat-input' onSubmit={handleSubmit} data-testid='chat-input'>
+            <TextInput handleKeyPress={handleKeyPress} handleChange={handleChange} />
             <SendButton />
         </form>
     )

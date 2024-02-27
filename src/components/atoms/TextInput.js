@@ -1,6 +1,6 @@
-function TextInput({handleChange}) {
+function TextInput({handleChange, handleKeyPress}) {
     return (
-        <input id='text-input' onChange={handleChange} data-testid='text-input' type='text' />
+            <textarea onKeyDown={handleKeyPress} autoFocus={true} id='text-input' onChange={handleChange} data-testid='text-input'></textarea>
     )
 }
 
